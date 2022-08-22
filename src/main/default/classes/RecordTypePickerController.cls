@@ -139,18 +139,8 @@ public with sharing class RecordTypePickerController {
     }
 
     /**
-     * Your final words before creating a bowl of spaghetti code always contain the word "clever"
-     * 
-     * This is a clever hack to avoid the performance hit of a global describe call
-     */
-    private static SObjectType getSObjectTypeFromObjName(String objectApiName) {
-        SObjectType t = ((SObject)(Type.forName('Schema.'+ objectApiName).newInstance())).getSObjectType();
-        return t;
-    }
-
-    /**
-     *  Takes an SObjectType instance and returns a set of Ids containing 
-     *  the active and available record types for that SObject
+     *  Takes a list of object api names and returns a set of Ids containing 
+     *  the active and available record types for those SObjects
      */
     private static Set<Id> availableRecordTypeIdsFromObjectApiNames(List<String> objectApiNames){
         Set<Id> resultRecordTypeIds = new Set<Id>();
