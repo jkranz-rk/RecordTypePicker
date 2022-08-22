@@ -1,0 +1,44 @@
+<template>
+    <template if:true={availableRecordTypes}>
+        <fieldset class="slds-form-element">
+            <legend class="slds-form-element__legend slds-form-element__label">{label}</legend>
+            <div class="slds-form-element__control">
+                <template for:each={availableRecordTypes} for:item="recordType">
+                    <span key={recordType.Id} class="slds-radio">
+                        <input type="radio" id={recordType.Id} value={recordType.Id} name={uuid} />
+                        <label class="slds-radio__label slds-grid" for={recordType.Id}>
+                            <span class="slds-radio_faux slds-m-top_xxx-small"></span>
+                            <span class="slds-form-element__label slds-p-top_none">
+                                <template if:true={showDescription}>
+                                    <lightning-layout multiple-rows class="slds-m-bottom_x-small">
+                                        <lightning-layout-item size="12" flexibility="auto" class="slds-p-left_none">
+                                            <strong>{recordType.Name}</strong>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" flexibility="auto" class="slds-p-left_none">
+                                            {recordType.Description}
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                                <template if:false={showDescription}>
+                                    {recordType.Name}
+                                </template>
+                            </span>
+                        </label>
+                    </span>
+                </template>
+            </div>
+        </fieldset>
+    </template>
+    <div if:true={_error} class="slds-scoped-notification slds-media slds-media_center slds-theme_error" role="status">
+        <div class="slds-media__figure">
+            <lightning-icon 
+                icon-name="utility-error"
+                size="small"
+                variant=""
+            ></lightning-icon>
+        </div>
+        <div class="slds-media__body">
+            {_error}
+        </div>
+    </div>
+</template>

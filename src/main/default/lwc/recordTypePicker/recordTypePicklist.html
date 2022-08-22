@@ -1,0 +1,10 @@
+<template>
+    <template if:true={availableRecordTypes}>
+        <lightning-combobox
+            label={label} 
+            options={picklistOptions}
+            onchange={handleChange}
+            dropdown-alignment="auto">
+        </lightning-combobox>
+    </template>
+</template>

@@ -1,0 +1,15 @@
+{
+  "packageDirectories": [
+    {
+      "path": "src",
+      "default": true
+    },
+    {
+      "path": "tests"
+    }
+  ],
+  "name": "RecordTypePicker",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "55.0"
+}
