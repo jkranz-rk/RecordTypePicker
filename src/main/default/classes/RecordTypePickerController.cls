@@ -8,7 +8,7 @@ public with sharing class RecordTypePickerController {
     public static List<RecordType> getRecordTypes(String sObjectApiName) {
     
         Set<Id> availableRTForSelectedObject = RecordTypePickerController.availableRecordTypeIdsFromObjectApiNames(
-            New List<String>{ sObjectApiName }
+            new List<String>{ sObjectApiName }
         );
 
         return [ SELECT Id, Name, Description, DeveloperName 
@@ -45,24 +45,24 @@ public with sharing class RecordTypePickerController {
      */
     public static List<RecordTypePickerController.Result> invokeGetRecordTypes(List<RecordTypePickerController.Request> requests) {
         Set<String> objectNameSet = new Set<String>();
-        Set<Id> availableRecordTypeIds = New Set<Id>();
-        List<RecordTypePickerController.Result> results = New List<RecordTypePickerController.Result>();
+        Set<Id> availableRecordTypeIds = new Set<Id>();
+        List<RecordTypePickerController.Result> results = new List<RecordTypePickerController.Result>();
 
-        For (RecordTypePickerController.Request request : requests) {
+        for (RecordTypePickerController.Request request : requests) {
             objectNameSet.add(request.objectApiName);
         }
 
 
         availableRecordTypeIds.addAll(
-            RecordTypePickerController.availableRecordTypeIdsFromObjectApiNames(New List<String>( objectNameSet ))
+            RecordTypePickerController.availableRecordTypeIdsFromObjectApiNames(new List<String>( objectNameSet ))
         );
 
         Map<String,List<RecordType>> objToRtMap = RecordTypePickerController.getMapOfObjectNameToRT(
             RecordTypePickerController.recordTypesFromIds(availableRecordTypeIds)
         );
 
-        For (RecordTypePickerController.Request request : requests) {
-            RecordTypePickerController.Result result = New RecordTypePickerController.Result();
+        for (RecordTypePickerController.Request request : requests) {
+            RecordTypePickerController.Result result = new RecordTypePickerController.Result();
             result.recordTypes = objToRtMap.get(request.objectApiName);
             results.add(result);
         }
@@ -100,7 +100,7 @@ public with sharing class RecordTypePickerController {
 
         Set<String> SObjectsWithRecordTypes = new Set<String>();
 
-        For (RecordType recordType : activeRecordTypes){
+        for (RecordType recordType : activeRecordTypes){
             SObjectsWithRecordTypes.add(recordType.SObjectType);
         }
 
@@ -125,14 +125,14 @@ public with sharing class RecordTypePickerController {
      * that we're working with in the invocable method
      */
     private static Map<String,List<RecordType>> getMapOfObjectNameToRT(List<RecordType> recordTypes) {
-        Map<String,List<RecordType>> resultMap = New Map<String,List<RecordType>>();
-        For (RecordType rt : recordTypes) {
+        Map<String,List<RecordType>> resultMap = new Map<String,List<RecordType>>();
+        for (RecordType rt : recordTypes) {
             if (resultMap.containsKey(rt.SobjectType)) {
                 List<RecordType> rts = resultMap.get(rt.SObjectType);
                 rts.add(rt);
                 resultMap.put(rt.SobjectType,rts);
             } else {
-                resultMap.put(rt.SobjectType, New List<RecordType>{rt});
+                resultMap.put(rt.SobjectType, new List<RecordType>{rt});
             }
         }
         return resultMap;
