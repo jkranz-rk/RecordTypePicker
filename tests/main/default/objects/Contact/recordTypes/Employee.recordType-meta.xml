@@ -3,4 +3,5 @@
     <fullName>Employee</fullName>
     <active>true</active>
     <label>Employee</label>
+    <description>An employee of Global Holdings, Inc</description>
 </RecordType>

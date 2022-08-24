@@ -3,4 +3,5 @@
     <fullName>External</fullName>
     <active>true</active>
     <label>External</label>
+    <description>A person external to Global Holdings, Inc. e.g., a Customer or Partner</description>
 </RecordType>
