@@ -1,0 +1,48 @@
+<template>
+    <lightning-input 
+        type="text" 
+        label="Label" 
+        name="label" 
+        data-attribute="label"
+        data-type="String"
+        value={label}
+        onblur={handleChange}>
+    </lightning-input>
+    <lightning-input 
+        type="text" 
+        label="Object API Name" 
+        name="object-api-name" 
+        value={objectApiName}
+        data-attribute="objectApiName"
+        data-type="String"
+        onblur={handleChange}>
+    </lightning-input>
+    <lightning-combobox 
+        label="Display Type"
+        options={displayTypeOptions}
+        value={displayType} 
+        data-attribute="displayType"
+        data-type="String"
+        onchange={handleChange}>
+    </lightning-combobox>
+    <lightning-input 
+        type="toggle" 
+        label="Show Record Type Descriptions" 
+        name="show-descriptions-toggle" 
+        class="slds-m-top_xx-small"
+        data-attribute="showDescription"
+        data-type="Boolean"
+        onchange={handleChange}
+        checked={showDescription}>
+    </lightning-input>
+    <lightning-input
+        type="toggle"
+        label="Auto-navigate on selection"
+        name="auto-navigate-toggle"
+        data-attribute="autoNavigateNext"
+        data-type="Boolean"
+        onchange={handleChange}
+        checked={autoNavigateNext}
+    >
+    </lightning-input>
+</template>
