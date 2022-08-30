@@ -1,0 +1,12 @@
+.modal-hidden {
+    display: none;
+}
+
+.full-backdrop {
+    width: 150vw;
+    left:-25vw;
+}
+
+.preview-background {
+    background-color: rgb(242, 242, 242);
+}

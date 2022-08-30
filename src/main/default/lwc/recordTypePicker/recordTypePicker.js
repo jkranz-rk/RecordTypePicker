@@ -7,18 +7,58 @@ import { generateUUID, reduceErrors } from 'c/recordTypePickerLwcUtils';
 import pickerTemplate from './recordTypeVisualPicker.html';
 import radioTemplate from './recordTypeRadioGroup.html';
 import picklistTemplate from './recordTypePicklist.html';
+import errorTemplate from './recordTypePickerError.html';
 
 export default class RecordTypePicker extends LightningElement {
 
-    @api objectApiName;
-    @api label = 'Select a Record Type';
     @api selectedRecordType;
     @api availableRecordTypes;
-    @api autoNavigateNext = false;
-    @api showDescription;
-    @api displayType = 'picker';
 
-    @api mode = 'live';
+    @api objectApiName;
+    @api label;
+    get label(){
+        return this._label;
+    }
+    set label(val){
+        this._label = val;
+    }
+    _label = 'Select a RecordType';
+
+    @api autoNavigateNext;
+    get autoNavigateNext(){
+        return this._autoNavigateNext;
+    }
+    set autoNavigateNext(val){
+        this._autoNavigateNext = val;
+    }
+    _autoNavigateNext = false;
+
+    @api showDescription;
+    get showDescription(){
+        return this._showDescription;
+    }
+    set showDescription(val){
+        this._showDescription = val;
+    }
+    _showDescription = true;
+
+    @api displayType;
+    get displayType(){
+        return this._displayType;
+    }
+    set displayType(val){
+        this._displayType = val?.toLowerCase();
+    }
+    _displayType = 'picker';
+
+    @api mode;
+    get mode(){
+        return this._mode;
+    }
+    set mode(val){
+        this._mode = val?.toLowerCase();
+    }
+    _mode = 'live';
 
     _error;
     _selectedValue;
@@ -26,11 +66,14 @@ export default class RecordTypePicker extends LightningElement {
     uuid;
 
     get isPreview() {
-        return this.mode.toLowerCase() === 'preview';
+        return this._mode === 'preview';
     }
 
     render(){
-        switch(this.displayType.toLowerCase()){
+        if (this._error) {
+            return errorTemplate;
+        }
+        switch(this._displayType){
             case 'picker':
                 return pickerTemplate;
             case 'radio' :
@@ -43,8 +86,8 @@ export default class RecordTypePicker extends LightningElement {
     }
 
     connectedCallback(){
-        if (this.isPreview && !this.availableRecordTypes){
-            this.availableRecordTypes = previewRecordTypes;
+        if (this.recordTypes.data && this.recordTypes.data.length === 0){
+            this._error = 'You must select an Object that has active Record Types';
         }
 
         if (!this.uuid) {
@@ -54,8 +97,7 @@ export default class RecordTypePicker extends LightningElement {
 
     @wire(getRecordTypes, { sObjectApiName : '$objectApiName'})
     recordTypes({ error,data }) {
-        if (data && !this.isPreview) {
-            console.log(JSON.parse(JSON.stringify(data)));
+        if (data) {
             this.availableRecordTypes = data;
             this._error = undefined;
         }
@@ -101,7 +143,7 @@ export default class RecordTypePicker extends LightningElement {
             new FlowAttributeChangeEvent('selectedRecordType',this.selectedRecordType)
         );
 
-        if (this.autoNavigateNext){
+        if (this.autoNavigateNext && !this.isPreview){
             this.navigateNext();
         }
     } 

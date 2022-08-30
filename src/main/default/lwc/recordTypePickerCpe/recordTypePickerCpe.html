@@ -1,0 +1,73 @@
+<template>
+    <c-record-type-picker-cpe-inputs
+        config={configuration}
+        onvaluechange={handleValueChange}
+    ></c-record-type-picker-cpe-inputs>
+    <div class="slds-m-around_small slds-align_absolute-center">
+        <lightning-button 
+            title="Preview"
+            label="Preview"
+            variant="neutral"
+            icon-name="utility:preview"
+            onclick={handlePreviewOpen}
+        ></lightning-button>
+    </div>
+    <c-configuration-modal 
+        header="Preview and Configure Record Type Picker"
+        class="preview-background">
+            <lightning-layout class="preview-background">
+                <lightning-layout-item flexibility="auto" class="slds-p-around_small">
+                    <div class="slds-card slds-card_boundary">
+                        <div class="slds-card__header slds-grid">
+                            <h2 class="slds-card__header-title">
+                                Preview
+                            </h2>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">
+                            <template if:true={previewConfig}>
+                                <c-record-type-picker
+                                    label={previewConfig.label.value}
+                                    display-type={previewConfig.displayType.value}
+                                    object-api-name={previewConfig.objectApiName.value}
+                                    mode="preview"
+                                    class="preview"
+                                    show-description={previewConfig.showDescription.value} >
+                                </c-record-type-picker> 
+                            </template>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto, no-grow" class="slds-grow-none slds-shrink-none">
+                    <div class="slds-panel slds-size_medium slds-panel_docked slds-panel_docked-right slds-is-open" aria-hidden="false">
+                        <div class="slds-panel__header">
+                            <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate" title="Panel Header">
+                                {previewConfigPanelHeaderLabel}
+                            </h2>
+                        </div>
+                        <div class="slds-panel__body panel-height">
+                            <c-record-type-picker-cpe-inputs
+                                config={previewConfig}
+                                onvaluechange={handlePreviewChange}
+                            ></c-record-type-picker-cpe-inputs>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        <span slot="footer">
+            <lightning-button 
+                title="Cancel"
+                label="Cancel"
+                variant="neutral"
+                onclick={handlePreviewCancel}
+            ></lightning-button>
+            <lightning-button 
+                name="save-preview"
+                title="Save"
+                label="Save"
+                variant="brand"
+                class="slds-m-left_small"
+                onclick={handlePreviewSave}
+            ></lightning-button>
+        </span>
+    </c-configuration-modal>
+</template>
