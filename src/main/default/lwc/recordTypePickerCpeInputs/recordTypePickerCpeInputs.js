@@ -1,4 +1,7 @@
-import { api, LightningElement } from 'lwc';
+import { api, LightningElement, track } from 'lwc';
+import { defaultProperties } from 'c/cpeHelper';
+import { reduceErrors } from 'c/recordTypePickerLwcUtils';
+import getObjectsWithRecordTypes from '@salesforce/apex/RecordTypePickerController.getObjectsWithRecordTypes';
 
 const DISPLAY_OPTIONS = [
     {value: 'picker',    label: 'Visual Picker'},
@@ -8,54 +11,76 @@ const DISPLAY_OPTIONS = [
 
 export default class RecordTypePickerCpeInputs extends LightningElement {
 
-    @api config;
+
+    @api
     get config(){
         return _config;
     }
     set config(value){
-        console.log(value);
-        this._config = value;
+        this._config = {...value};
     }
 
+    @track
     _config;
-
-    get label(){
-        return this._config.label.value;
-    };
-    get objectApiName(){
-        return this._config.objectApiName.value;
-    };
-    get displayType(){
-        return this._config.displayName.value;
-    };
-    get showDescription() {
-        return this._config.showDescription.value;
-    };
-    get autoNavigateNext(){
-        return this._config.autoNavigateNext.value;
-    };
+    
+    _error;
 
     displayTypeOptions = DISPLAY_OPTIONS;
+    objectsWithRecordTypes;
+    
+    defaults = {...defaultProperties};
 
-    handleChange(event){
-        const type = event.target.dataset.type;
-        let value;
-        if (type === 'String'){
-            value = event.target.value;
-        } else if (type === 'Boolean'){
-            value = event.target.checked;
-        }
-        const valueChangeEvent = new CustomEvent('valuechange',
-            { 
-                detail: {
-                    name: event.target.dataset.attribute,
-                    value: value,
-                    type: type
-                }
-            }
-        );
-        console.log(valueChangeEvent);
-        this.dispatchEvent(valueChangeEvent);
+    get label(){
+        return this._config?.label.value ?? defaultProperties.label.value;
+    };
+    get objectApiName(){
+        return this._config?.objectApiName.value ?? defaultProperties.objectApiName.value;
+    };
+    get displayType(){
+        return this._config?.displayType.value ?? defaultProperties.displayType.value;
+    };
+    get showDescription() {
+        return this._config?.showDescription.value ?? defaultProperties.showDescription.value;
+    };
+    get autoNavigateNext(){
+        return this._config?.autoNavigateNext.value ?? defaultProperties.autoNavigateNext.value;
+    };
+
+    connectedCallback(){
+        getObjectsWithRecordTypes().then((data) => {
+            this.objectsWithRecordTypes = data.map(object => {
+                return {
+                    value: object.QualifiedApiName,
+                    label: object.MasterLabel,
+                    description: object.QualifiedApiName
+                };
+            });
+        })
+        .catch((error) => {
+            this._error = reduceErrors(error);
+        });
     }
 
+    handleStringChange(event){
+        this.publishChange({
+            name: event.target.dataset.attribute,
+            newValue: event.detail.value,
+            newValueDataType: 'String'
+        });
+    };
+
+    handleBooleanChange(event){
+        this.publishChange({
+            name: event.target.dataset.attribute,
+            newValue: event.target.checked,
+            newValueDataType: 'Boolean'
+        });
+    };
+
+    publishChange(values){
+        const valueChangeEvent = new CustomEvent('valuechange',
+            { detail: {...values} }
+        );
+        this.dispatchEvent(valueChangeEvent);
+    };
 }

@@ -86,16 +86,19 @@ public with sharing class RecordTypePickerController {
     }
 
     /**
-     * For future use in Custom Property Editor to Return a list of Objects with RecordTypes
+     * For use in Custom Property Editor to Return a list of Objects that have active RecordTypes
      * 
      */
     @AuraEnabled(cacheable=true)
     public static List<EntityDefinition> getObjectsWithRecordTypes(){
-
+        // There's a deprecated standard object called Metric with RecordTypes. WTF.
+        // Anyway, there's hardcoding here to filter it out. Whatever.
+        // TODO: find a better way to handle this. Cannot use UserEntityAccess in SOQL Where clause
         List<RecordType> activeRecordTypes = [
             SELECT SObjectType 
             FROM RecordType 
             WHERE IsActive = true
+                AND SObjectType != 'Metric'
         ];
 
         Set<String> SObjectsWithRecordTypes = new Set<String>();
@@ -104,10 +107,12 @@ public with sharing class RecordTypePickerController {
             SObjectsWithRecordTypes.add(recordType.SObjectType);
         }
 
+
         return [
             SELECT MasterLabel, QualifiedApiName 
             FROM EntityDefinition
             WHERE QualifiedApiName IN :SObjectsWithRecordTypes
+            ORDER BY MasterLabel ASC
         ];
     }
 

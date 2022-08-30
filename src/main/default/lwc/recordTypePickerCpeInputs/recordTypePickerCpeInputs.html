@@ -1,48 +1,72 @@
 <template>
-    <lightning-input 
-        type="text" 
-        label="Label" 
-        name="label" 
-        data-attribute="label"
-        data-type="String"
-        value={label}
-        onblur={handleChange}>
-    </lightning-input>
-    <lightning-input 
-        type="text" 
-        label="Object API Name" 
-        name="object-api-name" 
-        value={objectApiName}
-        data-attribute="objectApiName"
-        data-type="String"
-        onblur={handleChange}>
-    </lightning-input>
-    <lightning-combobox 
-        label="Display Type"
-        options={displayTypeOptions}
-        value={displayType} 
-        data-attribute="displayType"
-        data-type="String"
-        onchange={handleChange}>
-    </lightning-combobox>
-    <lightning-input 
-        type="toggle" 
-        label="Show Record Type Descriptions" 
-        name="show-descriptions-toggle" 
-        class="slds-m-top_xx-small"
-        data-attribute="showDescription"
-        data-type="Boolean"
-        onchange={handleChange}
-        checked={showDescription}>
-    </lightning-input>
-    <lightning-input
-        type="toggle"
-        label="Auto-navigate on selection"
-        name="auto-navigate-toggle"
-        data-attribute="autoNavigateNext"
-        data-type="Boolean"
-        onchange={handleChange}
-        checked={autoNavigateNext}
-    >
-    </lightning-input>
+    <template if:true={_config}>
+        <lightning-input 
+            type="text" 
+            label="Label" 
+            data-attribute="label"
+            data-type="String"
+            value={label}
+            onchange={handleStringChange}>
+        </lightning-input>
+        <lightning-combobox 
+            label="Object" 
+            value={objectApiName}
+            options={objectsWithRecordTypes}
+            data-attribute="objectApiName"
+            data-type="String"
+            onchange={handleStringChange}
+            dropdown-alignment="auto"
+            required>
+        </lightning-combobox>
+<!--         <lightning-input 
+            type="text" 
+            label="Object API Name" 
+            value={objectApiName}
+            data-attribute="objectApiName"
+            data-type="String"
+            onblur={handleStringChange}>
+        </lightning-input> -->
+        <lightning-combobox 
+            label="Display Type"
+            options={displayTypeOptions}
+            value={displayType} 
+            data-attribute="displayType"
+            data-type="String"
+            onchange={handleStringChange}
+            dropdown-alignment="auto"
+            required>
+        </lightning-combobox>
+        <lightning-input 
+            type="toggle" 
+            label="Show Record Type Descriptions" 
+            class="slds-m-top_xx-small"
+            data-attribute="showDescription"
+            data-type="Boolean"
+            onchange={handleBooleanChange}
+            checked={showDescription}>
+        </lightning-input>
+        <lightning-input
+            type="toggle"
+            label="Auto-navigate on selection"
+            data-attribute="autoNavigateNext"
+            data-type="Boolean"
+            onchange={handleBooleanChange}
+            checked={autoNavigateNext}
+        >
+        </lightning-input>
+    </template>
+    <template if:true={_error}>
+        <div class="slds-scoped-notification slds-media slds-media_center slds-theme_error" role="status">
+            <div class="slds-media__figure">
+                <lightning-icon 
+                    icon-name="utility:error"
+                    size="small"
+                    variant=""
+                ></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+                {_error}
+            </div>
+        </div>
+    </template>
 </template>

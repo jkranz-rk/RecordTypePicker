@@ -10,18 +10,21 @@
     <targetConfigs>
         <targetConfig 
             targets="lightning__FlowScreen"
-            >
+            configurationEditor="c-record-type-picker-cpe">
             <property 
                 name="objectApiName" 
                 type="String" 
                 label="Object API Name" 
                 description="API Name of the Object for which to display Record Types available to the User" 
+                role="inputOnly"
                 />
             <property 
                 name="label" 
                 type="String" 
                 label="Label" 
                 description="Label to display above the selection. Defaults to 'Select a Record Type'" 
+                default="Select a RecordType"
+                role="inputOnly"
                 />
             <property 
                 name="selectedRecordType" 
@@ -34,12 +37,16 @@
                 type="Boolean" 
                 label="Automatic Next on Select" 
                 description="Set to TRUE if you want to automatically navigate Next when the user makes a selection. Defaults to FALSE" 
+                default="false"
+                role="inputOnly"
                 />
             <property
                 name="showDescription"
                 type="Boolean"
                 label="Show Descriptions"
                 description="Set to TRUE to display each Record Type's Description" 
+                default="true"
+                role="inputOnly"
                 />
             <property 
                 name="displayType" 
@@ -47,6 +54,7 @@
                 label="Display Type" 
                 default="picker" 
                 description="Choose how to display the Record Type Picker: picker, radio, or picklist. Defaults to picker" 
+                role="inputOnly"
                 />
         </targetConfig>
     </targetConfigs>
