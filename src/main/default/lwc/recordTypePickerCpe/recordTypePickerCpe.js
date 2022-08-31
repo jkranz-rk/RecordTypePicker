@@ -1,7 +1,7 @@
 import { api, LightningElement, track } from 'lwc';
 import { defaultProperties } from 'c/cpeHelper';
 
-export default class TestCpe extends LightningElement {
+export default class RecordTypePickerCpe extends LightningElement {
     @api
     get inputVariables(){
         return this._inputVariables;
@@ -88,7 +88,6 @@ export default class TestCpe extends LightningElement {
     };
 
     handlePreviewChange(event){
-        this.log('Preview Config changed to: ',event.detail);
         this.previewConfig[event.detail.name] = {
             name: event.detail.name,
             value: event.detail.newValue,
