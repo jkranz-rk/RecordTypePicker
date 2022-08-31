@@ -11,6 +11,7 @@ Features included in this first beta release:
  - 3 display types (Visual Picker, Radio Group, Picklist)
  - Optional Show or Hide Description
  - Optional Auto-Next Navigation on Select
+ - Invocable Action to get a Collection of RecordTypes available to the running user for use with other screen components like Collection Choices or Data Table
 
 I've started building the issues log for enhancements and TODOs, feel free to submit issues and enhancement requests (PRs are welcome!)
 
