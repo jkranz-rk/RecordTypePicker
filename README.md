@@ -39,3 +39,13 @@ NOTE ABOUT THE TEST DIRECTORY: the "test" directory is _not_ needed for sandbox 
 Auto navigate on selection works best with the Visual Picker on a screen that doesn't have any other inputs and has the footer and/or Next button hidden. When the user clicks on a selection, the Flow will automatically navigate to the next screen. It is also recommended to provide a "Previous" button on the next screen so that the user has a chance change their selection if they've made a mistake.
 
 ![Autonavigation animated example](assets/autonavigation.gif)
+
+## Invocable Action
+
+Also included in this project is an invocable action. If you would rather use your own screen component and just need a way to get a collection of RecordTypes for an object that are available to the running user, you can use this invocable action to retrieve that collection, then use it where you need, such as a Data Table:
+
+![Finding the action](assets/invocable_find_element.png)
+
+![Flow canvas showing the action then screen](assets/invocable_flowcanvas.png)
+
+![Screen with resulting data table and record types for selection](assets/invocable_with_datatable.png)
