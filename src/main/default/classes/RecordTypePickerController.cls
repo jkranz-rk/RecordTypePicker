@@ -1,5 +1,5 @@
 @SuppressWarnings('PMD')
-public with sharing class RecordTypePickerController {
+global with sharing class RecordTypePickerController {
 
     /**
      * 
@@ -43,7 +43,7 @@ public with sharing class RecordTypePickerController {
     )
     /**
      */
-    public static List<RecordTypePickerController.Result> invokeGetRecordTypes(List<RecordTypePickerController.Request> requests) {
+    global static List<RecordTypePickerController.Result> invokeGetRecordTypes(List<RecordTypePickerController.Request> requests) {
         Set<String> objectNameSet = new Set<String>();
         Set<Id> availableRecordTypeIds = new Set<Id>();
         List<RecordTypePickerController.Result> results = new List<RecordTypePickerController.Result>();
@@ -70,7 +70,7 @@ public with sharing class RecordTypePickerController {
         return results;
     }
 
-    public class Request {
+    global class Request {
         @InvocableVariable(
             label='Object API Name'
             required=true
@@ -78,7 +78,7 @@ public with sharing class RecordTypePickerController {
         public String objectApiName;
     }
 
-    public class Result {
+    global class Result {
         @InvocableVariable(
             label='Record Types for Running User'
         )
