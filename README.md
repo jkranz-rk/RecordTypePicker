@@ -13,6 +13,10 @@ I've started building the issues log for enhancements and TODOs, feel free to su
 
 NOTE ABOUT THE TEST DIRECTORY: the "test" directory is _not_ needed for sandbox or scratch org deploys. It includes RecordTypes on the Contact object that is useful for demonstrations and QA but you probably don't want them in an org you care about. Until we get packaging sorted and/or dependency injection with mocking for tests, I don't recommend deploying this to a production org unless you've written your own tests and are comfortable with how it works for you.
 
+## Latest Released Unlocked Package Install URL
+
+`/packaging/installPackage.apexp?p0=04t4x000000RUUUAA4`
+
 ## Display Types 
 
 ### Visual Picker

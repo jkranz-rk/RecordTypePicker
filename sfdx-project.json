@@ -1,15 +1,33 @@
 {
-  "packageDirectories": [
-    {
-      "path": "src",
-      "default": true
-    },
-    {
-      "path": "tests"
+    "packageDirectories": [
+        {
+            "path": "src",
+            "default": true,
+            "package": "Record Type Picker",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "unpackagedMetadata": {
+                "path": "tests"
+            },
+            "apexTestAccess": {
+                "permissionSets": [
+                    "RecordTypePickerPermissionsTesting"
+                ]
+            }
+        },
+        {
+            "path": "tests"
+        }
+    ],
+    "name": "RecordTypePicker",
+    "namespace": "",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "55.0",
+    "packageAliases": {
+        "Record Type Picker": "0Ho4x000000GmwBCAS",
+        "Record Type Picker@0.1.0-1-feature/unlockedpackaging": "04t4x000000RUQ2AAO",
+        "Record Type Picker@0.1.0-2-feature/unlockedpackaging": "04t4x000000RUQ7AAO",
+        "Record Type Picker@0.1.0-3-feature/unlockedpackaging": "04t4x000000RUQCAA4",
+        "Record Type Picker@0.1.0-2": "04t4x000000RUUUAA4"
     }
-  ],
-  "name": "RecordTypePicker",
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "55.0"
 }
