@@ -94,4 +94,25 @@ private class RecordTypePickerControllerTest {
         );
     }
 
+    @IsTest 
+    static void getObjectsWithRecordTypes_shouldReturnContact(){
+        List<EntityDefinition> entities = new List<EntityDefinition>();
+
+        Test.startTest();
+        entities = RecordTypePickerController.getObjectsWithRecordTypes();
+        Test.stopTest();
+
+        System.assertEquals(
+            entities.size(),
+            1,
+            'getObjectsWithRecordTypes returned an unexpected number of objects'
+        );
+
+        System.assertEquals(
+            entities[0].QualifiedApiName,
+            RecordTypePickerControllerTest.OBJECT_NAME,
+            'getObjectsWithRecordTypes did not return the expected object'
+        );
+    }
+
 }
