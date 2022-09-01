@@ -27,7 +27,7 @@ NOTE ABOUT THE TEST DIRECTORY: the "test" directory is _not_ needed for sandbox 
 ### Radio Group
 ![Radio Group with Descriptions](assets/radiogroup_desc.png)
 
-![Radio Group without Descriptions](assets/picklist_no_desc.png)
+![Radio Group without Descriptions](assets/radiogroup_no_desc.png)
 
 ### Picklist
 ![Picklist with Descriptions](assets/picklist_desc.png)
