@@ -1,9 +1,5 @@
 # User-aware RecordType Picker for Flows (beta)
 
-Have you ever needed to build a Screen Flow that asks the user to select a record type for a record you want to create in the Flow? Using Out-of-the-Box tools, you can do things like hard-code a list of Choices, or use a RecordType collection and collection choice to present choices of Record Types to pick, but with these options it is not possible to _only_ present the Record Types that the running user has access to create!
-
-This has bothered me for quite some time, so I decided to do something about it.
-
 This project is an open-source free-to-use component that can be used in Screen Flows to give users selectable choices of Record Types for a given Object with Record Types that automatically only shows Record Types that are available to the running user.
 
 Features included in this first beta release:
