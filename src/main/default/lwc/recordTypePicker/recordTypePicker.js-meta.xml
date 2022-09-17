@@ -10,7 +10,7 @@
     <targetConfigs>
         <targetConfig 
             targets="lightning__FlowScreen"
-            configurationEditor="rtp-record-type-picker-cpe">
+            configurationEditor="rtp-record-type-picker-cpe"> 
             <property 
                 name="objectApiName" 
                 type="String" 

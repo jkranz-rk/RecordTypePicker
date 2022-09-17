@@ -40,7 +40,7 @@ export default class RecordTypePicker extends LightningElement {
     set showDescription(val){
         this._showDescription = val;
     }
-    _showDescription = true;
+    _showDescription;
 
     @api displayType;
     get displayType(){
