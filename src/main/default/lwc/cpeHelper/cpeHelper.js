@@ -33,6 +33,20 @@ const flowConstants = {
     }
 };
 
+const convertBooleanFlowToReal = (boolVal) => {
+    if (boolVal === '$GlobalConstant.True') {
+        return true;
+    } else if (boolVal === '$GlobalConstant.False') {
+        return false;
+    } else {
+        return boolVal;
+    }
+};
+
+const convertBooleanRealToFlow = (boolVal) => {
+    return boolVal ? '$GlobalConstant.True' : '$GlobalConstant.False';
+};
+
 const defaultProperties = {
     objectApiName : {
         name : 'objectApiName',
@@ -49,9 +63,9 @@ const defaultProperties = {
         value : 'picker',
         valueDataType : 'String'
     },
-    showDescription : {
-        name : 'showDescription',
-        value : true,
+    hideDescriptions : {
+        name : 'hideDescriptions',
+        value : false,
         valueDataType : 'Boolean'
     },
     autoNavigateNext : {
@@ -61,4 +75,4 @@ const defaultProperties = {
     }
 };
 
-export {notifyPropertyChange, flowConstants, defaultProperties};
+export {notifyPropertyChange, flowConstants, defaultProperties, convertBooleanFlowToReal, convertBooleanRealToFlow};

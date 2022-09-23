@@ -1,7 +1,20 @@
 import { api, LightningElement, track } from 'lwc';
-import { defaultProperties } from 'c/cpeHelper';
+import { 
+    defaultProperties, 
+    convertBooleanRealToFlow,
+    convertBooleanFlowToReal 
+} from 'c/cpeHelper';
 
 export default class RecordTypePickerCpe extends LightningElement {
+    @api
+    get allInputVariables(){
+        return this._allInputVariables;
+    }
+    set allInputVariables(val){
+        this._allInputVariables = val;
+    }
+    @track _allInputVariables;
+
     @api
     get inputVariables(){
         return this._inputVariables;
@@ -9,7 +22,7 @@ export default class RecordTypePickerCpe extends LightningElement {
     set inputVariables(val){
         this._inputVariables = val;
     }
-    _inputVariables;
+    @track _inputVariables;
 
     @api
     get builderContext(){
@@ -18,7 +31,16 @@ export default class RecordTypePickerCpe extends LightningElement {
     set builderContext(val){
         this._builderContext = val;
     }
-    _builderContext;
+    @track _builderContext;
+
+    @api
+    get automaticOutputVariables(){
+        return this._automaticOutputVariables;
+    }
+    set automaticOutputVariables(val){
+        this._automaticOutputVariables = val;
+    }
+    @track _automaticOutputVariables;
 
     @api
     get elementInfo(){
@@ -27,7 +49,7 @@ export default class RecordTypePickerCpe extends LightningElement {
     set elementInfo(val){
         this._elementInfo = val;
     }
-    _elementInfo;
+    @track _elementInfo;
 
     @track
     configuration = {...defaultProperties};
@@ -43,9 +65,16 @@ export default class RecordTypePickerCpe extends LightningElement {
         }
         
         this._inputVariables.forEach( input => {
-            this.configuration[input.name] = {...input};
+            let cleanedInput = {...input};
+            if (input.valueDataType === 'Boolean') { // transpose '$GlobalConstant strings to Booleans
+                cleanedInput.value = convertBooleanFlowToReal(input.value);
+            }
+            if (input.name === 'showDescription') { //convert deprecated showDescription attribute to new hideDescriptions attribute
+                cleanedInput.name = 'hideDescriptions';
+                cleanedInput.value = !cleanedInput.value;
+            }
+            this.configuration[cleanedInput.name] = {...cleanedInput};
         });
-        
         this._initialized = true;
     }
 
@@ -63,6 +92,7 @@ export default class RecordTypePickerCpe extends LightningElement {
     };
     
     notifyPropertyChange = (name,newValue,newValueDataType) => {
+        newValue = (newValueDataType === 'Boolean' ? convertBooleanRealToFlow(newValue) : newValue);
         this.dispatchEvent(new CustomEvent(
             'configuration_editor_input_value_changed', {
                  bubbles: true,
@@ -102,8 +132,14 @@ export default class RecordTypePickerCpe extends LightningElement {
     handlePreviewSave(){
         Object.values(this.previewConfig).forEach(prop => {
             if (this.configuration[prop.name]?.value !== prop.value){
+
                 this.configuration[prop.name].value = prop.value;
-                this.notifyPropertyChange(prop.name,prop.value,prop.valueDataType);
+
+                this.notifyPropertyChange(
+                    prop.name,
+                    prop.value,
+                    prop.valueDataType
+                );
             }
         });
         this.template.querySelector('c-configuration-modal').hide();

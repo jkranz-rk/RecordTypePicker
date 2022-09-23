@@ -15,16 +15,17 @@ export default class RecordTypePicker extends LightningElement {
     @api availableRecordTypes;
 
     @api objectApiName;
-    @api label;
+
+    @api
     get label(){
         return this._label;
     }
     set label(val){
         this._label = val;
     }
-    _label = 'Select a RecordType';
+    _label = 'Select a Record Type';
 
-    @api autoNavigateNext;
+    @api
     get autoNavigateNext(){
         return this._autoNavigateNext;
     }
@@ -33,16 +34,16 @@ export default class RecordTypePicker extends LightningElement {
     }
     _autoNavigateNext = false;
 
-    @api showDescription;
-    get showDescription(){
-        return this._showDescription;
+    @api
+    get hideDescriptions(){
+        return this._hideDescriptions;
     }
-    set showDescription(val){
-        this._showDescription = val;
+    set hideDescriptions(val){
+        this._hideDescriptions = val;
     }
-    _showDescription;
+    _hideDescriptions;
 
-    @api displayType;
+    @api
     get displayType(){
         return this._displayType;
     }
@@ -51,7 +52,7 @@ export default class RecordTypePicker extends LightningElement {
     }
     _displayType = 'picker';
 
-    @api mode;
+    @api
     get mode(){
         return this._mode;
     }
@@ -59,6 +60,10 @@ export default class RecordTypePicker extends LightningElement {
         this._mode = val?.toLowerCase();
     }
     _mode = 'live';
+
+    // deprecated in favor of hideDescriptions, since we want the default
+    // value to be `True`, its a bad practice to set boolean defaults to `True`
+    @api showDescription; 
 
     _error;
     _selectedValue;
@@ -108,7 +113,7 @@ export default class RecordTypePicker extends LightningElement {
     };
 
     get picklistOptions(){
-        if (this.showDescription){
+        if (!this.hideDescriptions){
             return this.availableRecordTypes.map((rt) => {
                 return {
                     value: rt.Id,
@@ -124,7 +129,6 @@ export default class RecordTypePicker extends LightningElement {
                 };
             });
         }
-        
     }
 
     handleChange(event){
