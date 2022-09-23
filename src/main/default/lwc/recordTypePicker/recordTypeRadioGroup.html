@@ -9,7 +9,7 @@
                         <label class="slds-radio__label slds-grid" for={recordType.Id}>
                             <span class="slds-radio_faux slds-m-top_xxx-small"></span>
                             <span class="slds-form-element__label slds-p-top_none">
-                                <template if:true={showDescription}>
+                                <template if:false={hideDescriptions}>
                                     <lightning-layout multiple-rows class="slds-m-bottom_x-small">
                                         <lightning-layout-item size="12" flexibility="auto" class="slds-p-left_none">
                                             <strong>{recordType.Name}</strong>
@@ -19,7 +19,7 @@
                                         </lightning-layout-item>
                                     </lightning-layout>
                                 </template>
-                                <template if:false={showDescription}>
+                                <template if:true={hideDescriptions}>
                                     {recordType.Name}
                                 </template>
                             </span>

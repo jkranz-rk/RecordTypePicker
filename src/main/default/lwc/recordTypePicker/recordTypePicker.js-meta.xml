@@ -10,7 +10,7 @@
     <targetConfigs>
         <targetConfig 
             targets="lightning__FlowScreen"
-            configurationEditor="rtp-record-type-picker-cpe">
+            configurationEditor="rtp-record-type-picker-cpe"> 
             <property 
                 name="objectApiName" 
                 type="String" 
@@ -23,7 +23,7 @@
                 type="String" 
                 label="Label" 
                 description="Label to display above the selection. Defaults to 'Select a Record Type'" 
-                default="Select a RecordType"
+                default="Select a Record Type"
                 role="inputOnly"
                 />
             <property 
@@ -41,11 +41,11 @@
                 role="inputOnly"
                 />
             <property
-                name="showDescription"
+                name="hideDescriptions"
                 type="Boolean"
-                label="Show Descriptions"
-                description="Set to TRUE to display each Record Type's Description" 
-                default="true"
+                label="Hide Descriptions"
+                description="Set to TRUE to hide the Record Types' Descriptions" 
+                default="false"
                 role="inputOnly"
                 />
             <property 
@@ -54,6 +54,14 @@
                 label="Display Type" 
                 default="picker" 
                 description="Choose how to display the Record Type Picker: picker, radio, or picklist. Defaults to picker" 
+                role="inputOnly"
+                />
+            <property 
+                name="showDescription" 
+                type="Boolean" 
+                label="DEPRECATED"
+                description="DEPRECATED"
+                default="true"
                 role="inputOnly"
                 />
         </targetConfig>

@@ -15,7 +15,7 @@ NOTE ABOUT THE TEST DIRECTORY: the "test" directory is _not_ needed for sandbox 
 
 ## Latest Released Unlocked Package Install URL
 
-`/packaging/installPackage.apexp?p0=04t4x000000RUUUAA4`
+`/packaging/installPackage.apexp?p0=04t4x000000RqyHAAS`
 
 ## Display Types 
 
