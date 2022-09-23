@@ -40,6 +40,8 @@ global with sharing class RecordTypePickerController {
     @InvocableMethod(
         label='Record Types for Running User'
         description='Input an Object\'s API name, returns a collection of Record Types that are available to the running user'
+        category='Record Types'
+        iconName='slds:standard:relationship'
     )
     /**
      */
