@@ -4,8 +4,8 @@
             "path": "src",
             "default": true,
             "package": "Record Type Picker",
-            "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT",
+            "versionName": "ver 0.3",
+            "versionNumber": "0.3.0.NEXT",
             "unpackagedMetadata": {
                 "path": "tests"
             },
@@ -13,14 +13,16 @@
                 "permissionSets": [
                     "RecordTypePickerPermissionsTesting"
                 ]
-            }
+            },
+            "releaseNotesUrl": "https://github.com/jkranz-rk/RecordTypePicker",
+            "postInstallUrl": "https://github.com/jkranz-rk/RecordTypePicker"
         },
         {
             "path": "tests"
         }
     ],
     "name": "RecordTypePicker",
-    "namespace": "",
+    "namespace": "rtp",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "55.0",
     "packageAliases": {
@@ -28,6 +30,10 @@
         "Record Type Picker@0.1.0-1-feature/unlockedpackaging": "04t4x000000RUQ2AAO",
         "Record Type Picker@0.1.0-2-feature/unlockedpackaging": "04t4x000000RUQ7AAO",
         "Record Type Picker@0.1.0-3-feature/unlockedpackaging": "04t4x000000RUQCAA4",
-        "Record Type Picker@0.1.0-2": "04t4x000000RUUUAA4"
+        "Record Type Picker@0.1.0-2": "04t4x000000RUUUAA4",
+        "Record Type Picker@0.2.0-2": "04t4x000000RqffAAC",
+        "Record Type Picker@0.2.0-3": "04t4x000000RqfkAAC",
+        "Record Type Picker@0.2.0-4": "04t4x000000RqyCAAS",
+        "Record Type Picker@0.3.0-1": "04t4x000000RqyHAAS"
     }
 }
