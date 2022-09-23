@@ -40,11 +40,15 @@ export default class RecordTypePickerCpeInputs extends LightningElement {
         return this._config?.displayType.value ?? defaultProperties.displayType.value;
     };
     get showDescription() {
-        return this._config?.showDescription.value ?? defaultProperties.showDescription.value;
+        return (this._config?.hideDescriptions.value ?? defaultProperties.hideDescriptions.value) === false;
     };
     get autoNavigateNext(){
         return this._config?.autoNavigateNext.value ?? defaultProperties.autoNavigateNext.value;
     };
+
+    get variant(){
+        return this.showDescription ? 'brand' : 'neutral';
+    }
 
     connectedCallback(){
         getObjectsWithRecordTypes().then((data) => {
@@ -72,7 +76,7 @@ export default class RecordTypePickerCpeInputs extends LightningElement {
     handleBooleanChange(event){
         this.publishChange({
             name: event.target.dataset.attribute,
-            newValue: event.target.checked,
+            newValue: (event.target.dataset.attribute === 'hideDescriptions') ? !event.target.checked : event.target.checked,
             newValueDataType: 'Boolean'
         });
     };
@@ -82,5 +86,6 @@ export default class RecordTypePickerCpeInputs extends LightningElement {
             { detail: {...values} }
         );
         this.dispatchEvent(valueChangeEvent);
+        this._config[values.name] = {...values};
     };
 }

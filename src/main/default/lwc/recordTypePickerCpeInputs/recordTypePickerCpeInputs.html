@@ -32,7 +32,7 @@
             type="toggle" 
             label="Show Record Type Descriptions" 
             class="slds-m-top_xx-small"
-            data-attribute="showDescription"
+            data-attribute="hideDescriptions"
             data-type="Boolean"
             onchange={handleBooleanChange}
             checked={showDescription}>
@@ -43,8 +43,7 @@
             data-attribute="autoNavigateNext"
             data-type="Boolean"
             onchange={handleBooleanChange}
-            checked={autoNavigateNext}
-        >
+            checked={autoNavigateNext}>
         </lightning-input>
     </template>
     <template if:true={_error}>
