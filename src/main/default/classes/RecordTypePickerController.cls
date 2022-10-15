@@ -43,8 +43,6 @@ global with sharing class RecordTypePickerController {
         category='Record Types'
         iconName='slds:standard:relationship'
     )
-    /**
-     */
     global static List<RecordTypePickerController.Result> invokeGetRecordTypes(List<RecordTypePickerController.Request> requests) {
         Set<String> objectNameSet = new Set<String>();
         Set<Id> availableRecordTypeIds = new Set<Id>();
@@ -53,7 +51,6 @@ global with sharing class RecordTypePickerController {
         for (RecordTypePickerController.Request request : requests) {
             objectNameSet.add(request.objectApiName);
         }
-
 
         availableRecordTypeIds.addAll(
             RecordTypePickerController.availableRecordTypeIdsFromObjectApiNames(new List<String>( objectNameSet ))
@@ -77,14 +74,14 @@ global with sharing class RecordTypePickerController {
             label='Object API Name'
             required=true
         )
-        public String objectApiName;
+        global String objectApiName;
     }
 
     global class Result {
         @InvocableVariable(
             label='Record Types for Running User'
         )
-        public List<RecordType> recordTypes;
+        global List<RecordType> recordTypes;
     }
 
     /**
