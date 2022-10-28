@@ -1,5 +1,12 @@
 {
   "orgName": "RecordType Picker Development",
   "edition": "Developer",
-  "features": []
+  "features": [],
+  "settings": {
+    "userManagementSettings": {
+      "enableEnhancedPermsetMgmt": true,
+      "enableEnhancedProfileMgmt": true,
+      "enableNewProfileUI": true
+    }
+  }
 }
