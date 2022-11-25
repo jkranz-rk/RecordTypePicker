@@ -60,6 +60,15 @@ export default class RecordTypePicker extends LightningElement {
     _displayType = 'picker';
 
     @api
+    get sortOrder(){
+        return this._sortOrder;
+    }
+    set sortOrder(val){
+        this._sortOrder = val;
+    }
+    _sortOrder = 'ASC';
+
+    @api
     get mode(){
         return this._mode;
     }
@@ -110,7 +119,23 @@ export default class RecordTypePicker extends LightningElement {
     @wire(getRecordTypes, { sObjectApiName : '$objectApiName'})
     recordTypes({ error,data }) {
         if (data) {
-            this.availableRecordTypes = data;
+            // we'll use this to invert the order if _orderBy is set to descending, default to ascending
+            const ORDER_INVERTER = this._orderBy === 'DESC' ? -1 : 1; 
+            let returnData = [...data];
+            this._returnedRecordTypes = returnData.sort(function(a,b) {
+                const aName = a.Name.toLowerCase(); //Object.assign({},a).Name;
+                const bName = b.Name.toLowerCase(); //Object.assign({},b).Name;
+
+                if (aName < bName) {
+                    return -1 * ORDER_INVERTER;
+                }
+
+                if (aName > bName) {
+                    return 1 * ORDER_INVERTER;
+                }
+
+                return 0;
+            });
             this._error = undefined;
         }
         if (error) {
@@ -136,7 +161,6 @@ export default class RecordTypePicker extends LightningElement {
                 label: rt.Name
             };
         });
-        }
     }
 
     handleChange(event){
