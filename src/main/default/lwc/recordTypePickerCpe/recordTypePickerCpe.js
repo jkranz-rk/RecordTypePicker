@@ -89,7 +89,7 @@ export default class RecordTypePickerCpe extends LightningElement {
             event.detail.newValue,
             event.detail.newValueDataType
         );
-    };
+    }
     
     notifyPropertyChange = (name,newValue,newValueDataType) => {
         newValue = (newValueDataType === 'Boolean' ? convertBooleanRealToFlow(newValue) : newValue);
@@ -110,12 +110,12 @@ export default class RecordTypePickerCpe extends LightningElement {
     get previewConfigPanelHeaderLabel(){
         return this._elementInfo?.apiName ?
             this._elementInfo.apiName : 'Record Type Picker';
-    };
+    }
 
     handlePreviewOpen(){
         this.previewConfig = {...this.configuration};
         this.template.querySelector('c-configuration-modal').show();
-    };
+    }
 
     handlePreviewChange(event){
         this.previewConfig[event.detail.name] = {
@@ -123,11 +123,11 @@ export default class RecordTypePickerCpe extends LightningElement {
             value: event.detail.newValue,
             valueDataType: event.detail.newValueDataType
         };
-    };
+    }
 
     handlePreviewCancel(){
         this.template.querySelector('c-configuration-modal').hide();
-    };
+    }
 
     handlePreviewSave(){
         Object.values(this.previewConfig).forEach(prop => {
