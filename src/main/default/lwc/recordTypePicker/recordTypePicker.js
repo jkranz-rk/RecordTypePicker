@@ -117,7 +117,7 @@ export default class RecordTypePicker extends LightningElement {
             this._error = reduceErrors(error);
             this._returnedRecordTypes = undefined;
         }
-    };
+    }
 
     get picklistOptions(){
         if (!this.hideDescriptions){
@@ -128,13 +128,14 @@ export default class RecordTypePicker extends LightningElement {
                     description: rt.Description
                 };
             });
-        } else {
-            return this.availableRecordTypes.map((rt) => {
-                return {
-                    value: rt.Id,
-                    label: rt.Name
-                };
-            });
+        }
+        
+        return this.availableRecordTypes.map((rt) => {
+            return {
+                value: rt.Id,
+                label: rt.Name
+            };
+        });
         }
     }
 
