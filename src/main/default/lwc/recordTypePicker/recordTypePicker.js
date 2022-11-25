@@ -11,8 +11,15 @@ import errorTemplate from './recordTypePickerError.html';
 
 export default class RecordTypePicker extends LightningElement {
 
-    @api selectedRecordType;
-    @api availableRecordTypes;
+    @api get selectedRecordType(){
+        return this._selectedRecordType;
+    }
+    _selectedRecordType;
+
+    @api get availableRecordTypes(){
+        return this._returnedRecordTypes;
+    }
+    _returnedRecordTypes;
 
     @api objectApiName;
 
@@ -108,7 +115,7 @@ export default class RecordTypePicker extends LightningElement {
         }
         if (error) {
             this._error = reduceErrors(error);
-            this.availableRecordTypes = undefined;
+            this._returnedRecordTypes = undefined;
         }
     };
 
@@ -139,7 +146,7 @@ export default class RecordTypePicker extends LightningElement {
             this._selectedValue = event.target.value;
         }
 
-        this.selectedRecordType = this.availableRecordTypes.find(
+        this._selectedRecordType = this.availableRecordTypes.find(
             rt => rt.Id === this._selectedValue
         );
 
