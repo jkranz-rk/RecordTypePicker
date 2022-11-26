@@ -11,8 +11,15 @@ import errorTemplate from './recordTypePickerError.html';
 
 export default class RecordTypePicker extends LightningElement {
 
-    @api selectedRecordType;
-    @api availableRecordTypes;
+    @api get selectedRecordType(){
+        return this._selectedRecordType;
+    }
+    _selectedRecordType;
+
+    @api get availableRecordTypes(){
+        return this._returnedRecordTypes;
+    }
+    _returnedRecordTypes;
 
     @api objectApiName;
 
@@ -51,6 +58,15 @@ export default class RecordTypePicker extends LightningElement {
         this._displayType = val?.toLowerCase();
     }
     _displayType = 'picker';
+
+    @api
+    get sortOrder(){
+        return this._sortOrder;
+    }
+    set sortOrder(val){
+        this._sortOrder = val;
+    }
+    _sortOrder = 'ASC';
 
     @api
     get mode(){
@@ -103,14 +119,30 @@ export default class RecordTypePicker extends LightningElement {
     @wire(getRecordTypes, { sObjectApiName : '$objectApiName'})
     recordTypes({ error,data }) {
         if (data) {
-            this.availableRecordTypes = data;
+            // we'll use this to invert the order if _orderBy is set to descending, default to ascending
+            const ORDER_INVERTER = this._orderBy === 'DESC' ? -1 : 1; 
+            let returnData = [...data];
+            this._returnedRecordTypes = returnData.sort(function(a,b) {
+                const aName = a.Name.toLowerCase(); //Object.assign({},a).Name;
+                const bName = b.Name.toLowerCase(); //Object.assign({},b).Name;
+
+                if (aName < bName) {
+                    return -1 * ORDER_INVERTER;
+                }
+
+                if (aName > bName) {
+                    return 1 * ORDER_INVERTER;
+                }
+
+                return 0;
+            });
             this._error = undefined;
         }
         if (error) {
             this._error = reduceErrors(error);
-            this.availableRecordTypes = undefined;
+            this._returnedRecordTypes = undefined;
         }
-    };
+    }
 
     get picklistOptions(){
         if (!this.hideDescriptions){
@@ -121,14 +153,14 @@ export default class RecordTypePicker extends LightningElement {
                     description: rt.Description
                 };
             });
-        } else {
-            return this.availableRecordTypes.map((rt) => {
-                return {
-                    value: rt.Id,
-                    label: rt.Name
-                };
-            });
         }
+        
+        return this.availableRecordTypes.map((rt) => {
+            return {
+                value: rt.Id,
+                label: rt.Name
+            };
+        });
     }
 
     handleChange(event){
@@ -139,7 +171,7 @@ export default class RecordTypePicker extends LightningElement {
             this._selectedValue = event.target.value;
         }
 
-        this.selectedRecordType = this.availableRecordTypes.find(
+        this._selectedRecordType = this.availableRecordTypes.find(
             rt => rt.Id === this._selectedValue
         );
 

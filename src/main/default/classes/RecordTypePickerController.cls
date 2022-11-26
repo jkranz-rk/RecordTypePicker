@@ -11,9 +11,11 @@ global with sharing class RecordTypePickerController {
             new List<String>{ sObjectApiName }
         );
 
-        return [ SELECT Id, Name, Description, DeveloperName 
-                 FROM RecordType 
-                 WHERE Id IN :availableRTForSelectedObject];
+        return [
+            SELECT Id, Name, Description, DeveloperName 
+            FROM RecordType 
+            WHERE Id IN :availableRTForSelectedObject
+        ];
     }
 
 
@@ -116,9 +118,11 @@ global with sharing class RecordTypePickerController {
     }
 
     private static List<RecordType> recordTypesFromIds(Set<Id> ids) {
-        return  [ SELECT Id, Name, Description, DeveloperName, SobjectType 
-                  FROM RecordType   
-                  WHERE Id IN :ids];
+        return  [ 
+            SELECT Id, Name, Description, DeveloperName, SobjectType 
+            FROM RecordType
+            WHERE Id IN :ids
+        ];
     }
 
     /**
@@ -154,9 +158,9 @@ global with sharing class RecordTypePickerController {
             for (Schema.RecordTypeInfo rtInfo : describeInfo.getRecordTypeInfos()){
                 if (rtInfo.isActive() && rtInfo.isAvailable()) {
                     resultRecordTypeIds.add(rtInfo.getRecordTypeId());
+                    }
                 }
             }
-        }
         return resultRecordTypeIds;
     }
 }

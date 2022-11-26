@@ -14,7 +14,7 @@ export default class RecordTypePickerCpeInputs extends LightningElement {
 
     @api
     get config(){
-        return _config;
+        return this._config;
     }
     set config(value){
         this._config = {...value};
@@ -32,19 +32,19 @@ export default class RecordTypePickerCpeInputs extends LightningElement {
 
     get label(){
         return this._config?.label.value ?? defaultProperties.label.value;
-    };
+    }
     get objectApiName(){
         return this._config?.objectApiName.value ?? defaultProperties.objectApiName.value;
-    };
+    }
     get displayType(){
         return this._config?.displayType.value ?? defaultProperties.displayType.value;
-    };
+    }
     get showDescription() {
         return (this._config?.hideDescriptions.value ?? defaultProperties.hideDescriptions.value) === false;
-    };
+    }
     get autoNavigateNext(){
         return this._config?.autoNavigateNext.value ?? defaultProperties.autoNavigateNext.value;
-    };
+    }
 
     get variant(){
         return this.showDescription ? 'brand' : 'neutral';
@@ -71,7 +71,7 @@ export default class RecordTypePickerCpeInputs extends LightningElement {
             newValue: event.detail.value,
             newValueDataType: 'String'
         });
-    };
+    }
 
     handleBooleanChange(event){
         this.publishChange({
@@ -79,7 +79,7 @@ export default class RecordTypePickerCpeInputs extends LightningElement {
             newValue: (event.target.dataset.attribute === 'hideDescriptions') ? !event.target.checked : event.target.checked,
             newValueDataType: 'Boolean'
         });
-    };
+    }
 
     publishChange(values){
         const valueChangeEvent = new CustomEvent('valuechange',
@@ -87,5 +87,5 @@ export default class RecordTypePickerCpeInputs extends LightningElement {
         );
         this.dispatchEvent(valueChangeEvent);
         this._config[values.name] = {...values};
-    };
+    }
 }

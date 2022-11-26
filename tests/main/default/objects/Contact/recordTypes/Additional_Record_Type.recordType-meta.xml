@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Additional_Record_Type</fullName>
+    <active>true</active>
+    <label>Additional Record Type</label>
+    <description>Another record type, displayed first if sorted alphabetically, ascending</description>
+</RecordType>
