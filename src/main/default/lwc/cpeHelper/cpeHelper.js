@@ -34,12 +34,13 @@ const flowConstants = {
 };
 
 const convertBooleanFlowToReal = (boolVal) => {
-    if (boolVal === '$GlobalConstant.True') {
-        return true;
-    } else if (boolVal === '$GlobalConstant.False') {
-        return false;
-    } else {
-        return boolVal;
+    switch (boolVal) {
+        case '$GlobalConstant.True':
+            return true;
+        case '$GlobalConstant.False':
+            return false;
+        default:
+            return false;
     }
 };
 
